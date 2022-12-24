@@ -1,9 +1,6 @@
 package com.udacity.pricing.domain.price;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
@@ -17,6 +14,7 @@ public class Price {
     private Long id;
     private String currency;
     private BigDecimal price;
+    @Column(name = "vehicleid")
     private Long vehicleId;
 
     public Price() {
