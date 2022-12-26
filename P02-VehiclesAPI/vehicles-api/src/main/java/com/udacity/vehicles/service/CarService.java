@@ -46,7 +46,7 @@ public class CarService {
         String price = priceClient.getPrice(id);
         car.setPrice(price);
 
-        Location address = mapsClient.getAddress(car.getLocation());
+        Location address = mapsClient.getAddress(car.getLocation(), id);
         car.setLocation(address);
 
         return car;

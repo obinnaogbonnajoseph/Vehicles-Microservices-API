@@ -31,7 +31,7 @@ public class MapsClient {
      * @return An updated location including street, city, state and zip,
      *   or an exception message noting the Maps service is down
      */
-    public Location getAddress(Location location) {
+    public Location getAddress(Location location, long vehicleId) {
         try {
             Address address = client
                     .get()
@@ -39,6 +39,7 @@ public class MapsClient {
                             .path("/maps/")
                             .queryParam("lat", location.getLat())
                             .queryParam("lon", location.getLon())
+                            .queryParam("vehicleId", vehicleId)
                             .build()
                     )
                     .retrieve().bodyToMono(Address.class).block();

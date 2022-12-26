@@ -21,8 +21,8 @@ public class PricingController {
     private PricingService pricingService;
 
     @Autowired
-    public void setPricingService(PricingService dogService) {
-        this.pricingService = dogService;
+    public void setPricingService(PricingService pricingService) {
+        this.pricingService = pricingService;
     }
 
     /**

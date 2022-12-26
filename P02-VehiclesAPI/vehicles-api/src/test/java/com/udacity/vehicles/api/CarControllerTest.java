@@ -25,6 +25,8 @@ import java.util.Collections;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -72,6 +74,7 @@ public class CarControllerTest {
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isCreated());
+        verify(carService, times(1)).save(any());
     }
 
     /**
@@ -84,6 +87,7 @@ public class CarControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("_embedded.carList[0].id", is(1)))
                 .andExpect(jsonPath("_embedded.carList[0].details.model", is("Impala")));
+        verify(carService, times(1)).list();
     }
 
     /**
@@ -97,7 +101,7 @@ public class CarControllerTest {
                 .andExpect(jsonPath("id", is(1)))
                 .andExpect(jsonPath("details.model", is("Impala")))
                 .andExpect(jsonPath("details.manufacturer.code", is(101)));
-
+        verify(carService, times(1)).findById(1L);
     }
 
     /**
@@ -108,6 +112,7 @@ public class CarControllerTest {
     public void deleteCar() throws Exception {
         mvc.perform(delete("/cars/1"))
                 .andExpect(status().is(204));
+        verify(carService, times(1)).delete(1L);
     }
 
     /**
